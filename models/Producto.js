@@ -13,13 +13,46 @@ const ProductosSchema = mongoose.Schema({
     },
     descripcion: {
         type: String,
+        required: true,
         trim: true,
     },
     categoria: {
         type: String,
+        required: true,
         trim: true,
     },
-    foto: {
+    serie: {
+        type: String,
+        trim: true,
+    },
+    stock: {
+        type: String,
+        trim: true,
+    },
+    image1: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    image2: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    image3: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    image4: {
+        type: String,
+        trim: true,
+    },
+    image5: {
+        type: String,
+        trim: true,
+    },
+    image6: {
         type: String,
         trim: true,
     },
