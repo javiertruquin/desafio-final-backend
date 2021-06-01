@@ -28,7 +28,7 @@ exports.crearUsuario = async (req, res) => {
         await usuario.save();
 
         //mensaje de exito
-        res.send("Usuario Creado Correctamente");
+        res.send(usuario);
     } catch (error) {
         console.log(error);
         res.status(400).send("Hubo un error al crear el Usuario");
@@ -36,5 +36,5 @@ exports.crearUsuario = async (req, res) => {
 };
 
 exports.obtenerUsuarios = (req, res) => {
-    console.log("funcion obtener usuarios");
+    console.log("función obtener usuarios");
 };
