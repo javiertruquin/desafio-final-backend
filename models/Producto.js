@@ -26,7 +26,13 @@ const ProductosSchema = mongoose.Schema({
         trim: true,
     },
     stock: {
-        type: String,
+        type: Number,
+        required: true,
+        trim: true,
+    },
+    precio: {
+        type: Number,
+        required: true,
         trim: true,
     },
     image1: {
@@ -60,6 +66,11 @@ const ProductosSchema = mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
+    creator: {
+        type: String,
+        trim: true,
+        required: true,
+    }
 });
 
 module.exports = mongoose.model("Producto", ProductosSchema);

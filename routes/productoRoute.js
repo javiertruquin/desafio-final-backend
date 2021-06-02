@@ -6,10 +6,7 @@ const { check } = require("express-validator");
 
 router.post(
     "/",
-    // [
-    //     check("codigo", "El código es obligatorio").not().isEmpty(),
-    //     check("titulo", "El titulo es obligatorio").not().isEmpty(),
-    // ],
+    // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
     productoController.crearProducto
 );
 

@@ -34,7 +34,7 @@ app.use(morgan("tiny"));
 
 //importar rutas
 app.use("/api/usuarios", usuarioRoute);
-app.use("/api/productos", productoRoute);
+app.use("/api/producto", productoRoute);
 app.use("/api/auth", authRoute);
 
 // puerto y arranque del servidor
