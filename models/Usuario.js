@@ -21,10 +21,15 @@ const UsuariosSchema = mongoose.Schema({
         required: true,
         trim: true,
     },
+    roll: {
+        type: String,
+        trim: true,
+        required: true,
+    },
     registro: {
         type: Date,
         default: Date.now(),
-    },
+    }
 });
 
 module.exports = mongoose.model("Usuario", UsuariosSchema);
