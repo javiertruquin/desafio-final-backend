@@ -67,3 +67,14 @@ exports.obtenerProductos = async (req, res) => {
         console.log('🚀 - error', error);
     }
 };
+
+exports.editarProducto = async (req, res) => {
+    try {
+        const { body } = req;
+        // console.log('req', body.id)
+        const actualizacionProducto = await Producto.findByIdAndUpdate(body.id, body, { new: true });
+        res.send(actualizacionProducto);
+    } catch (error) {
+        res.status(400).send({ msg: 'Hubo un error al actualizar el producto'});
+    }
+};

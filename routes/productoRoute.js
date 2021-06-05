@@ -16,6 +16,7 @@ router.get(
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
     productoController.obtenerProductos
 );
+router.put("/", adminMiddleware, productoController.editarProducto);
 router.delete("/", adminMiddleware, productoController.deleteProducto);
 
 module.exports = router;
