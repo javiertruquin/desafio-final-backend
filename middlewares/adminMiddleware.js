@@ -15,7 +15,8 @@ module.exports = async function (req, res, next) {
         const cifrado = jwt.verify(token, process.env.SECRETA);
         req.usuario = cifrado.usuario;
         const usuarioEncontrado = await Usuario.findById(req.usuario.id);
-        if (!usuarioEncontrado.roll === 'admin') {
+        console.log('usuario encontrado', usuarioEncontrado);
+        if (usuarioEncontrado.roll === 'usuario') {
             return res.status(401).json({ msg: 'Permiso no valido' });
         }
         //Continuar al siguiente middleware

@@ -98,6 +98,5 @@ exports.login = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     const usuario = await Usuario.findById(req.usuario.id).select('-password -__v');
-
     res.send(usuario);
 };

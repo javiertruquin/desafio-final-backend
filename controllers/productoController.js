@@ -3,16 +3,16 @@ const { validationResult } = require("express-validator");
 
 exports.crearProducto = async (req, res) => {
     // revisamos los errores
-    console.log('lo lee');
-
+    
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
         return res.status(400).json({ msg: errores.array() });
     }
-
+    
     let { body } = req;
     let { codigo , titulo } = body;
-
+    
+    console.log('body', body);
     try {
         let productoEncontrado = await Producto.findOne({ codigo });
         if (productoEncontrado) {
