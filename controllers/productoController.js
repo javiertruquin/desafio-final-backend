@@ -12,7 +12,7 @@ exports.crearProducto = async (req, res) => {
     let { body } = req;
     let { codigo , titulo } = body;
     
-    console.log('body', body);
+    console.log('entro');
     try {
         let productoEncontrado = await Producto.findOne({ codigo });
         if (productoEncontrado) {
