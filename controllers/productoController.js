@@ -72,8 +72,9 @@ exports.obtenerProductos = async (req, res) => {
 exports.editarProducto = async (req, res) => {
     try {
         const { body } = req;
+        console.log('entro', body)
         // console.log('req', body.id)
-        const actualizacionProducto = await Producto.findByIdAndUpdate(body.id, body, { new: true });
+        const actualizacionProducto = await Producto.findOneAndUpdate({codigo: body.codigo}, body, { new: true });
         res.send(actualizacionProducto);
     } catch (error) {
         res.status(400).send({ msg: 'Hubo un error al actualizar el producto'});
