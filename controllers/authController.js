@@ -73,7 +73,7 @@ exports.login = async (req, res) => {
         if (!passCorrect) {
             return res.status(400).json({ msg: 'Password incorrecto' });
         }
-        const usuarioRoll = usuario.roll;
+        const usuarioRol = usuario.rol;
         // Si todo es correcto Crear y firmar JWT
         const payload = {
             usuario: {
@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
             },
             (error, token) => {
                 if (error) throw error;
-                res.json({ token , usuarioRoll });
+                res.json({ token , usuarioRol });
             }
         );
     } catch (error) {
@@ -97,6 +97,6 @@ exports.login = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-    const usuario = await Usuario.findById(req.usuario.id).select('-password -__v');
+    const usuario = await Usuario.findById(req.usuario.id).select('-password -__v').populate("carrito.producto");
     res.send(usuario);
 };

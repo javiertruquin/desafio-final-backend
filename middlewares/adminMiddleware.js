@@ -16,7 +16,7 @@ module.exports = async function (req, res, next) {
         req.usuario = cifrado.usuario;
         const usuarioEncontrado = await Usuario.findById(req.usuario.id);
         console.log('usuario encontrado', usuarioEncontrado);
-        if (usuarioEncontrado.roll === 'usuario') {
+        if (usuarioEncontrado.rol === 'usuario') {
             return res.status(401).json({ msg: 'Permiso no valido' });
         }
         //Continuar al siguiente middleware

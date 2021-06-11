@@ -1,6 +1,6 @@
-const Usuario = require("../models/Usuario");
-const bcryptjs = require("bcryptjs");
-const { validationResult } = require("express-validator");
+const Usuario = require('../models/Usuario');
+const bcryptjs = require('bcryptjs');
+const { validationResult } = require('express-validator');
 
 exports.crearUsuario = async (req, res) => {
     // revisamos los errores
@@ -14,7 +14,7 @@ exports.crearUsuario = async (req, res) => {
     try {
         let usuarioEncontrado = await Usuario.findOne({ email });
         if (usuarioEncontrado) {
-            return res.status(400).send("Email ya esta en uso");
+            return res.status(400).send('Email ya esta en uso');
         }
 
         //nuevo usuario
@@ -31,10 +31,28 @@ exports.crearUsuario = async (req, res) => {
         res.send(usuario);
     } catch (error) {
         console.log(error);
-        res.status(400).send("Hubo un error al crear el Usuario");
+        res.status(400).send('Hubo un error al crear el Usuario');
     }
 };
 
 exports.obtenerUsuarios = (req, res) => {
-    console.log("función obtener usuarios");
+    console.log('función obtener usuarios');
+};
+
+exports.modificarCarrito = async (req, res) => {
+    try {
+        const { itemCarrito } = req.body
+        const usuario = await Usuario.findById({ _id: req.usuario.id });
+        const foundCartItem = usuario.carrito.find((item)=>item.producto === itemCarrito.producto)
+        if (foundCartItem) {
+            foundCartItem.cantidad = itemCarrito.cantidad
+        }else{
+            usuario.carrito.push(itemCarrito);
+        }
+        await usuario.save();
+        res.send(usuario);
+
+    } catch (error) {
+        console.log('exports.modificarUsuario= ~ error', error);
+    }
 };

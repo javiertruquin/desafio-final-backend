@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const UsuariosSchema = mongoose.Schema({
     nombre: {
         type: String,
@@ -21,15 +21,20 @@ const UsuariosSchema = mongoose.Schema({
         required: true,
         trim: true,
     },
-    roll: {
+    rol: {
         type: String,
         trim: true,
         required: true,
+        default:"usuario",
     },
+    carrito: [{
+        producto: { type: mongoose.Schema.Types.ObjectId,ref:"Producto"},
+        cantidad: { type: Number, default: 1 },
+    }],
     registro: {
         type: Date,
         default: Date.now(),
-    }
+    },
 });
 
-module.exports = mongoose.model("Usuario", UsuariosSchema);
+module.exports = mongoose.model('Usuario', UsuariosSchema);

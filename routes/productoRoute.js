@@ -12,7 +12,7 @@ router.post(
     productoController.crearProducto
 );
 router.get(
-    "/", adminMiddleware,
+    "/", 
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
     productoController.obtenerProductos
 );

@@ -12,7 +12,7 @@ const ProductosSchema = mongoose.Schema({
         trim: true,
     },
     descripcion: {
-        type: String,
+        type: Array,
         required: true,
         trim: true,
     },
