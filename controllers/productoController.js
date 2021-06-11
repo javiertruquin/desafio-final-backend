@@ -12,7 +12,7 @@ exports.crearProducto = async (req, res) => {
     let { body } = req;
     let { codigo , titulo } = body;
     
-    console.log('body', body);
+    console.log('entro');
     try {
         let productoEncontrado = await Producto.findOne({ codigo });
         if (productoEncontrado) {
@@ -44,8 +44,9 @@ exports.crearProducto = async (req, res) => {
 exports.deleteProducto = async (req, res) => {
     try {
         const { body } = req;
+        console.log('body', body)
         // const { id } = req.params;
-        const producto = await Producto.findById(body.id);
+        const producto = await Producto.findOne(body);
         // if (!producto.creator.equals(usuario.id)) {
         //     return res.status(403).json({ msg: 'no tiene permitido eliminar este meme' });
         // }
@@ -71,8 +72,9 @@ exports.obtenerProductos = async (req, res) => {
 exports.editarProducto = async (req, res) => {
     try {
         const { body } = req;
+        console.log('entro', body)
         // console.log('req', body.id)
-        const actualizacionProducto = await Producto.findByIdAndUpdate(body.id, body, { new: true });
+        const actualizacionProducto = await Producto.findOneAndUpdate({codigo: body.codigo}, body, { new: true });
         res.send(actualizacionProducto);
     } catch (error) {
         res.status(400).send({ msg: 'Hubo un error al actualizar el producto'});

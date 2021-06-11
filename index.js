@@ -38,6 +38,6 @@ app.use("/api/producto", productoRoute);
 app.use("/api/auth", authRoute);
 
 // puerto y arranque del servidor
-app.listen(4000, () => {
+app.listen( process.env.PORT || 4000, () => {
     console.log("Servidor Funcionando");
 });
