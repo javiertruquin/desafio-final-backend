@@ -7,7 +7,6 @@ const cors = require('cors');
 const usuarioRoute = require('./routes/usuarioRoute');
 const productoRoute = require('./routes/productoRoute');
 const authRoute = require('./routes/authRoute');
-const mensajeRoute = require('./routes/mensajeRoute');
 
 // Conectar a mongodb
 // mongoose.Promise = global.Promise;
@@ -37,7 +36,6 @@ app.use(morgan('tiny'));
 app.use('/api/usuarios', usuarioRoute);
 app.use('/api/producto', productoRoute);
 app.use('/api/auth', authRoute);
-app.use('/api/mensajes', mensajeRoute);
 
 // puerto y arranque del servidor
 app.listen(process.env.PORT || 4000, () => {

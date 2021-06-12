@@ -25,12 +25,14 @@ const UsuariosSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        default:"usuario",
+        default: 'usuario',
     },
-    carrito: [{
-        producto: { type: mongoose.Schema.Types.ObjectId,ref:"Producto"},
-        cantidad: { type: Number, default: 1 },
-    }],
+    carrito: [
+        {
+            producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
+            cantidad: { type: Number, default: 1 },
+        },
+    ],
     registro: {
         type: Date,
         default: Date.now(),
