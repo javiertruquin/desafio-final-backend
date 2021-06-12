@@ -41,17 +41,19 @@ exports.obtenerUsuarios = (req, res) => {
 
 exports.modificarCarrito = async (req, res) => {
     try {
-        const { itemCarrito } = req.body
+        const { itemCarrito } = req.body;
         const usuario = await Usuario.findById({ _id: req.usuario.id });
-        const foundCartItem = usuario.carrito.find((item)=>item.producto === itemCarrito.producto)
+        const foundCartItem = usuario.carrito.find((item) => {
+            return item.producto.equals(itemCarrito.producto);
+        });
+        console.log('exports.modificarCarrito= ~ foundCartItem', foundCartItem);
         if (foundCartItem) {
-            foundCartItem.cantidad = itemCarrito.cantidad
-        }else{
+            foundCartItem.cantidad = itemCarrito.cantidad;
+        } else {
             usuario.carrito.push(itemCarrito);
         }
         await usuario.save();
         res.send(usuario);
-
     } catch (error) {
         console.log('exports.modificarUsuario= ~ error', error);
     }
