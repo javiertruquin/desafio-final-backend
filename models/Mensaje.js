@@ -19,6 +19,7 @@ const MensajeSchema = mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+        default: 'no leido',
     },
     fecha: {
         type: Date,

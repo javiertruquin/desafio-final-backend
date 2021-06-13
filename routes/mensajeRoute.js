@@ -4,7 +4,7 @@ const mensajeController = require('../controllers/mensajeController');
 const { check } = require('express-validator');
 
 // router.post('/',  mensajeController.);
-router.get(
+router.post(
     '/',
     [
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),
