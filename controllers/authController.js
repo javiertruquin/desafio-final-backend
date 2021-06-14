@@ -100,3 +100,8 @@ exports.getUser = async (req, res) => {
     const usuario = await Usuario.findById(req.usuario.id).select('-password -__v').populate("carrito.producto");
     res.send(usuario);
 };
+
+exports.getUserComplete = async (req, res) => {
+    const usuario = await Usuario.findById(req.usuario.id).select('-__v');
+    res.send(usuario);
+};
