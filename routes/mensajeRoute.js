@@ -14,4 +14,6 @@ router.post(
     mensajeController.obtenerMensaje
 );
 
+router.get('/', mensajeController.getMensajes);
+
 module.exports = router;

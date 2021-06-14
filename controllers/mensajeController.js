@@ -21,3 +21,8 @@ exports.obtenerMensaje = async (req, res) => {
         res.status(400).send('Hubo un error al enviar el mensaje');
     }
 };
+
+exports.getMensajes = async (req, res) => {
+    const mensajes = await Mensaje.find();
+    res.send(mensajes);
+};
