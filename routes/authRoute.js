@@ -15,5 +15,6 @@ router.post(
     authController.login
 );
 router.get('/', authMiddleware, authController.getUser);
+router.get('/complete', authMiddleware, authController.getUserComplete);
 
 module.exports = router;
