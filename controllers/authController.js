@@ -102,6 +102,12 @@ exports.getUser = async (req, res) => {
 };
 
 exports.getUserComplete = async (req, res) => {
-    const usuario = await Usuario.findById(req.usuario.id).select('-__v');
+    const usuario = await Usuario.findById(req.usuario.id).select('-password -__v');
     res.send(usuario);
+};
+
+exports.getUsers = async (req, res) => {
+    // const { rol } = req.query;
+    const usuarios = await Usuario.find(req.query).select('-password -__v');
+    res.send(usuarios);
 };

@@ -9,6 +9,7 @@ module.exports = async function (req, res, next) {
     if (!token) {
         return res.status(401).json({ msg: 'No hay Token, permiso no valido' });
     }
+    console.log('entro');
     
     // Validar Token
     try {

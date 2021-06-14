@@ -25,7 +25,6 @@ const UsuariosSchema = mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        default: 'usuario',
     },
     carrito: [
         {

@@ -4,6 +4,7 @@ const router = express.Router();
 const usuarioValidation = require('../validations/usuarioValidation');
 const authController = require('../controllers/authController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
 router.post('/register', usuarioValidation.crearUsuario, authController.register);
 router.post(
@@ -16,5 +17,6 @@ router.post(
 );
 router.get('/', authMiddleware, authController.getUser);
 router.get('/complete', authMiddleware, authController.getUserComplete);
+router.get('/usuariosAdmin', adminMiddleware, authController.getUsers);
 
 module.exports = router;
