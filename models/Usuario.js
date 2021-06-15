@@ -32,6 +32,11 @@ const UsuariosSchema = mongoose.Schema({
             cantidad: { type: Number, default: 1 },
         },
     ],
+    favoritos: [
+        {
+            producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
+        },
+    ],
     registro: {
         type: Date,
         default: Date.now(),

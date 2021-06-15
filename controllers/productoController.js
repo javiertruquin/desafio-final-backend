@@ -68,6 +68,16 @@ exports.obtenerProductos = async (req, res) => {
         console.log('🚀 - error', error);
     }
 };
+exports.obtenerProductosCategoria = async (req, res) => {
+    try {
+        const productos = await Producto.find(req.query);
+        res.send(productos);
+        console.log("funcion obtener productos");
+    } catch (error) {
+        res.status(400).json({ msg: 'error al obtener los productos' });
+        console.log('🚀 - error', error);
+    }
+};
 
 exports.editarProducto = async (req, res) => {
     try {

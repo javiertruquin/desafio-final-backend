@@ -16,6 +16,11 @@ router.get(
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
     productoController.obtenerProductos
 );
+router.get(
+    "/categoria", 
+    // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
+    productoController.obtenerProductosCategoria
+);
 router.put("/", adminMiddleware, productoController.editarProducto);
 router.delete("/", adminMiddleware, productoController.deleteProducto);
 
