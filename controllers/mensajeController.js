@@ -26,3 +26,14 @@ exports.getMensajes = async (req, res) => {
     const mensajes = await Mensaje.find();
     res.send(mensajes);
 };
+
+exports.deleteMensaje = async (req, res) => {
+    try {
+        const { mensajeId } = req.params;
+        await Mensaje.findByIdAndDelete(mensajeId);
+        res.send({ msg: 'Mensaje eliminado' });
+    } catch (error) {
+        res.status(400).json({ msg: 'error al eliminar meme' });
+        console.log('🚀 - error', error);
+    }
+};
