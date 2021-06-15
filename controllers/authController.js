@@ -1,6 +1,7 @@
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const Producto = require('../models/Producto');
 const Usuario = require('../models/Usuario');
 
 exports.register = async (req, res) => {
@@ -96,6 +97,39 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.editarUsuario = async (req, res) => {
+    try {
+        const { body } = req;
+        console.log('entro', body)
+
+        const salt = await bcryptjs.genSalt(10);
+        body.password = await bcryptjs.hash(body.password, salt);
+
+        // console.log('req', body.id)
+        const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
+        res.send(actualizacionUsuario);
+    } catch (error) {
+        res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
+    }
+};
+
+exports.deleteUsuario = async (req, res) => {
+    try {
+        const { body } = req;
+        // console.log('body', body)
+        // const { id } = req.params;
+        const usuario = await Usuario.findOne(body);
+        // if (!producto.creator.equals(usuario.id)) {
+        //     return res.status(403).json({ msg: 'no tiene permitido eliminar este meme' });
+        // }
+        await usuario.delete();
+        res.send({ msg: 'Usuario eliminado' });
+    } catch (error) {
+        res.status(400).json({ msg: 'error al eliminar el producto' });
+        console.log('🚀 - error', error);
+    }
+};
+
 exports.getUser = async (req, res) => {
     const usuario = await Usuario.findById(req.usuario.id).select('-password -__v').populate("carrito.producto");
     res.send(usuario);
@@ -106,8 +140,12 @@ exports.getUserComplete = async (req, res) => {
     res.send(usuario);
 };
 
-exports.getUsers = async (req, res) => {
-    // const { rol } = req.query;
+exports.getUsersFilter = async (req, res) => {
     const usuarios = await Usuario.find(req.query).select('-password -__v');
+    res.send(usuarios);
+};
+
+exports.getUsers = async (req, res) => {
+    const usuarios = await Usuario.find().select('-password -__v');
     res.send(usuarios);
 };

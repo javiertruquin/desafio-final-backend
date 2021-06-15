@@ -36,6 +36,31 @@ const UsuariosSchema = mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
+    habilitado: {
+        type: Boolean,
+        default: true,
+        trim: true,
+    },
+    titulo: {
+        type: String,
+        trim: true,
+    },
+    documento: {
+        type: Number,
+        trim: true,
+    },
+    telefono: {
+        type: Number,
+        trim: true,
+    },
+    domicilio: [
+        {
+            titulo: { type: String, trim: true, },
+            direccion: { type: String, trim: true, },
+            ciudad: { type: String, trim: true, },
+            codPostal: { type: Number, trim: true, },
+        },
+    ]
 });
 
 module.exports = mongoose.model('Usuario', UsuariosSchema);

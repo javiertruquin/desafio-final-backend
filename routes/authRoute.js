@@ -15,8 +15,11 @@ router.post(
     ],
     authController.login
 );
+router.put('/', adminMiddleware, authController.editarUsuario);
+router.delete("/", adminMiddleware, authController.deleteUsuario);
 router.get('/', authMiddleware, authController.getUser);
 router.get('/complete', authMiddleware, authController.getUserComplete);
+router.get('/usuariosFilter', adminMiddleware, authController.getUsersFilter);
 router.get('/usuariosAdmin', adminMiddleware, authController.getUsers);
 
 module.exports = router;
