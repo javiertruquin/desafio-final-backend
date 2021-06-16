@@ -29,7 +29,7 @@ const UsuariosSchema = mongoose.Schema({
     carrito: [
         {
             producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
-            cantidad: { type: Number, default: 1 },
+            // cantidad: { type: Number, default: 1 },
         },
     ],
     favoritos: [
@@ -51,7 +51,7 @@ const UsuariosSchema = mongoose.Schema({
         trim: true,
     },
     documento: {
-        type: Number,
+        type: String,
         trim: true,
     },
     telefono: {

@@ -15,7 +15,9 @@ router.post(
     ],
     authController.login
 );
-router.put('/', adminMiddleware, authController.editarUsuario);
+router.put('/', authMiddleware, authController.editarUsuario);
+router.put('/password', authMiddleware, authController.editarContraseña);
+router.put('/admin', adminMiddleware, authController.editarUsuario);
 router.delete("/", adminMiddleware, authController.deleteUsuario);
 router.get('/', authMiddleware, authController.getUser);
 router.get('/complete', authMiddleware, authController.getUserComplete);
