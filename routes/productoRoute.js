@@ -17,6 +17,11 @@ router.get(
     productoController.obtenerProductos
 );
 router.get(
+    "/buscar/:id", 
+    // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
+    productoController.obtenerProductoIndividual
+);
+router.get(
     "/categoria", 
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
     productoController.obtenerProductosCategoria
