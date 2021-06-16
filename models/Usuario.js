@@ -10,6 +10,10 @@ const UsuariosSchema = mongoose.Schema({
         required: true,
         trim: true,
     },
+    image: {
+        type: String,
+        trim: true,
+    },
     email: {
         type: String,
         required: true,
