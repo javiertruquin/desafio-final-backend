@@ -17,14 +17,14 @@ router.get(
     productoController.obtenerProductos
 );
 router.get(
-    "/buscar/:id", 
-    // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
-    productoController.obtenerProductoIndividual
+"/categoria", 
+// [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
+productoController.obtenerProductosCategoria
 );
 router.get(
-    "/categoria", 
+    "/:id", 
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
-    productoController.obtenerProductosCategoria
+    productoController.obtenerProductoIndividual
 );
 router.put("/", adminMiddleware, productoController.editarProducto);
 router.delete("/", adminMiddleware, productoController.deleteProducto);

@@ -157,14 +157,13 @@ exports.editarContraseña = async (req, res) => {
 
 exports.deleteUsuario = async (req, res) => {
     try {
-        const { body } = req;
+        const { id } = req.params;
         // console.log('body', body)
-        // const { id } = req.params;
-        const usuario = await Usuario.findOne(body);
+        const usuario = await Usuario.findByIdAndDelete(id);
         // if (!producto.creator.equals(usuario.id)) {
         //     return res.status(403).json({ msg: 'no tiene permitido eliminar este meme' });
         // }
-        await usuario.delete();
+        // await usuario.delete();
         res.send({ msg: 'Usuario eliminado' });
     } catch (error) {
         res.status(400).json({ msg: 'error al eliminar el producto' });
