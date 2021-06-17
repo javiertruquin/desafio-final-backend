@@ -8,6 +8,7 @@ const usuarioRoute = require('./routes/usuarioRoute');
 const productoRoute = require('./routes/productoRoute');
 const authRoute = require('./routes/authRoute');
 const mensajeRoute = require('./routes/mensajeRoute');
+const ventaRoute = require('./routes/ventaRoute');
 
 // Conectar a mongodb
 // mongoose.Promise = global.Promise;
@@ -38,6 +39,7 @@ app.use('/api/usuarios', usuarioRoute);
 app.use('/api/producto', productoRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/mensaje', mensajeRoute);
+app.use('/api/venta', ventaRoute);
 
 // puerto y arranque del servidor
 app.listen(process.env.PORT || 4000, () => {
