@@ -22,7 +22,12 @@ const VentaSchema = mongoose.Schema({
         trim: true,
         default: 1,
     },
-
+    articulos:[
+        {
+            producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
+            // cantidad: { type: Number, default: 1 },
+        },
+    ],
     fecha: {
         type: Date,
         default: Date.now(),
