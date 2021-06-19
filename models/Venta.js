@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const VentaSchema = mongoose.Schema({
     usuario: {
         type: String,
-        required: true,
+        // required: true,
         trim: true,
     },
     domicilio: [
@@ -18,7 +18,6 @@ const VentaSchema = mongoose.Schema({
     ],
     numeroventa: {
         type: Number,
-        required: true,
         trim: true,
         default: 1,
     },
