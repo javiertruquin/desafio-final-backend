@@ -101,9 +101,27 @@ exports.editarUsuario = async (req, res) => {
     try {
         const { body } = req;
         console.log('entro', body)
+        
+        // if ( direccion ) {
+        //     domicilio.push(domicilioObjeto)
+        //     const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
+        //     console.log('domicilio', actualizacionUsuario);
+        //     res.send(actualizacionUsuario);
+        // } else {
+        // }
+        const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
+        res.send(actualizacionUsuario);
+    } catch (error) {
+        res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
+    }
+};
+exports.editarContraseña = async (req, res) => {
+    try {
+        const { body } = req;
+        console.log('entro', body)
 
-        // const salt = await bcryptjs.genSalt(10);
-        // body.password = await bcryptjs.hash(body.password, salt);
+        const salt = await bcryptjs.genSalt(10);
+        body.password = await bcryptjs.hash(body.password, salt);
 
         // console.log('req', body.id)
         const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
@@ -125,21 +143,6 @@ exports.editarDomicilio = async (req, res) => {
     }
 };
 exports.editarUsuarioAdmin = async (req, res) => {
-    try {
-        const { body } = req;
-        console.log('entro', body)
-
-        const salt = await bcryptjs.genSalt(10);
-        body.password = await bcryptjs.hash(body.password, salt);
-
-        // console.log('req', body.id)
-        const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
-        res.send(actualizacionUsuario);
-    } catch (error) {
-        res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
-    }
-};
-exports.editarContraseña = async (req, res) => {
     try {
         const { body } = req;
         console.log('entro', body)

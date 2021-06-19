@@ -10,7 +10,7 @@ exports.crearProducto = async (req, res) => {
     }
 
     let { body } = req;
-    let { codigo, titulo } = body;
+    let { codigo, titulo, precio } = body;
 
     console.log('entro');
     try {
@@ -25,6 +25,9 @@ exports.crearProducto = async (req, res) => {
         }
         //nuevo producto
         // let producto = new Producto(req.body);
+        if ( body.descuento ) {
+            body.descuento = precio - ((parseInt(body.descuento) / 100) * precio);
+        }
 
         const newProducto = new Producto({ ...body, createdAt: Date.now(), creator: 'usuario.id' });
         await newProducto.save();
@@ -43,14 +46,14 @@ exports.crearProducto = async (req, res) => {
 
 exports.deleteProducto = async (req, res) => {
     try {
-        const { body } = req;
-        console.log('body', body);
+        const { id } = req.params;
+        console.log('entro')
         // const { id } = req.params;
-        const producto = await Producto.findOne(body);
+        const producto = await Producto.findByIdAndDelete(id);
         // if (!producto.creator.equals(usuario.id)) {
         //     return res.status(403).json({ msg: 'no tiene permitido eliminar este meme' });
         // }
-        await producto.delete();
+        // await producto.delete();
         res.send({ msg: 'Producto eliminado' });
     } catch (error) {
         res.status(400).json({ msg: 'error al eliminar el producto' });
@@ -71,20 +74,41 @@ exports.obtenerProductos = async (req, res) => {
 exports.obtenerProductosCategoria = async (req, res) => {
     try {
         const productos = await Producto.find(req.query);
-        res.send(productos);
+        const productosHabilitados = [];
+
+        for (let i = 0; i < productos.length; i++) {
+            const producto = productos[i];
+            if ( producto.habilitado ) {
+                productosHabilitados.push(producto);
+            }
+        }
+
+        // const productosHabilitados = productos.find({ habilitado: true });
+        // console.log('productos habilitados', productos);
+        res.send(productosHabilitados);
         console.log('funcion obtener productos');
     } catch (error) {
         res.status(400).json({ msg: 'error al obtener los productos' });
         console.log('🚀 - error', error);
     }
 };
+exports.obtenerProductosFiltro = async (req, res) => {
+    const productos = await Producto.find(req.query);
+    res.send(productos);
+};
 
 exports.editarProducto = async (req, res) => {
     try {
         const { body } = req;
-        console.log('entro', body);
-        // console.log('req', body.id)
-        const actualizacionProducto = await Producto.findOneAndUpdate({ codigo: body.codigo }, body, {
+        let productoEncontrado = await Producto.findById(body.id);
+        const precio = productoEncontrado.precio;
+        // console.log('entro', precio);
+
+        if ( body.descuento ) {
+            body.descuento = precio - ((parseInt(body.descuento) / 100) * precio);
+        }
+        console.log('req', body)
+        const actualizacionProducto = await Producto.findOneAndUpdate({ _id: body.id }, body, {
             new: true,
         });
         res.send(actualizacionProducto);
