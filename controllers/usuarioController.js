@@ -61,18 +61,41 @@ exports.modificarCarrito = async (req, res) => {
 exports.eliminarCarrito = async (req, res) => {
     try {
         const { productoBuscado } = req.body;
-        // console.log("exports.elimiarCarrito= ~ body", body)
         const usuario = await Usuario.findById({ _id: req.usuario.id });
         let nuevoCarrito = [];
         for (let i = 0; i < usuario.carrito.length; i++) {
             const element = usuario.carrito[i];
             if (element.producto != productoBuscado) {
-                nuevoCarrito.push(element)
+                nuevoCarrito.push(element);
             }
         }
         usuario.carrito = nuevoCarrito;
         await usuario.save();
         res.send(usuario);
     } catch (error) {
+        console.log('exports.eliminarCarrito= ~ error', error);
+    }
+};
+
+exports.cantidadCarrito = async (req, res) => {
+    try {
+        const { productoBuscado , cantidadNueva } = req.body;
+        const usuario = await Usuario.findById({ _id: req.usuario.id });
+        let nuevoCarrito=[];
+        for (let i = 0; i < usuario.carrito.length; i++) {
+            const element = usuario.carrito[i];
+            if (element.producto == productoBuscado) {
+                const id = element._id;
+                const idProducto = element.producto
+                nuevoCarrito.push({ cantidad: cantidadNueva ,producto : idProducto , _id: id});
+            }else{
+                nuevoCarrito.push(element);
+            }
+        }
+        usuario.carrito = nuevoCarrito;
+        await usuario.save();
+        res.send(usuario);
+    } catch (error) {
+        console.log('exports.cantidadCarrito= ~ error', error);
     }
 };
