@@ -64,9 +64,13 @@ const UsuariosSchema = mongoose.Schema({
     },
     domicilio: [
         {
-            titulo: { type: String, trim: true, },
-            direccion: { type: String, trim: true, },
-            ciudad: { type: String, trim: true, },
+            titulo: { type: String, trim: true, required: true, },
+            provincia: { type: String, trim: true, required: true, },
+            localidad: { type: String, trim: true, required: true, },
+            calle: { type: String, trim: true, required: true, },
+            numero: { type: Number, trim: true, required: true, },
+            departamento: { type: String, trim: true, },
+            indicaciones: { type: String, trim: true, },
             codPostal: { type: Number, trim: true, },
         },
     ]
