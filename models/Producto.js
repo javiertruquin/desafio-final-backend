@@ -35,6 +35,15 @@ const ProductosSchema = mongoose.Schema({
         required: true,
         trim: true,
     },
+    descuento: {
+        type: Number,
+        trim: true,
+    },
+    habilitado: {
+        type: Boolean,
+        default: true,
+        trim: true,
+    },
     image1: {
         type: String,
         required: true,

@@ -21,12 +21,13 @@ router.get(
 // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
 productoController.obtenerProductosCategoria
 );
+router.get('/filter', adminMiddleware, productoController.obtenerProductosFiltro);
 router.get(
     "/:id", 
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
     productoController.obtenerProductoIndividual
 );
 router.put("/", adminMiddleware, productoController.editarProducto);
-router.delete("/", adminMiddleware, productoController.deleteProducto);
+router.delete("/:id", adminMiddleware, productoController.deleteProducto);
 
 module.exports = router;
