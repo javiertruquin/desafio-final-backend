@@ -22,6 +22,11 @@ router.get(
 productoController.obtenerProductosCategoria
 );
 router.get('/filter', adminMiddleware, productoController.obtenerProductosFiltro);
+// router.get(
+//     "/:id", 
+//     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],
+//     productoController.obtenerProductoIndividual
+// );
 router.get(
     "/:id", 
     // [ check("codigo", "El código es obligatorio").not().isEmpty(), check("titulo", "El titulo es obligatorio").not().isEmpty(),],

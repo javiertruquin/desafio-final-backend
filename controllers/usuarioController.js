@@ -46,6 +46,7 @@ exports.modificarCarrito = async (req, res) => {
         const foundCartItem = usuario.carrito.find((item) => {
             return item.producto.equals(itemCarrito.producto);
         });
+        console.log('foundFavItem', foundCartItem);
         if (foundCartItem) {
             foundCartItem.cantidad = itemCarrito.cantidad;
         } else {
@@ -56,6 +57,41 @@ exports.modificarCarrito = async (req, res) => {
     } catch (error) {
         console.log('exports.modificarUsuario= ~ error', error);
     }
+};
+exports.modificarFavorito = async (req, res) => {
+    try {
+        console.log('entro');
+        const { itemFavorito } = req.body;
+        const usuario = await Usuario.findById({ _id: req.usuario.id });
+        const foundFavItem = usuario.favoritos.find((item) => {
+            return item.producto.equals(itemFavorito.producto);
+        });
+            if (foundFavItem) {
+                const nuevosFavoritos = [];
+                for (let i = 0; i < usuario.favoritos.length; i++) {
+                    const prodFavorito = usuario.favoritos[i];
+                    if ( foundFavItem.producto === prodFavorito.producto ) {
+                        console.log('coincide')
+                    } else {
+                        nuevosFavoritos.push(prodFavorito);                    
+                    }
+                }
+            usuario.favoritos = nuevosFavoritos;
+        } else {
+            usuario.favoritos.push(itemFavorito);
+        }
+        await usuario.save();
+        res.send(usuario);
+    } catch (error) {
+        console.log('exports.modificarUsuario= ~ error', error);
+    }
+};
+exports.obtenerFavoritos = async (req, res) => {
+    const { params } = req;
+    const usuario = await Usuario.findById({ _id: params.id });
+    res.send(usuario.favoritos)
+    // console.log('entro', usuario.favoritos)
+    
 };
 
 exports.eliminarCarrito = async (req, res) => {

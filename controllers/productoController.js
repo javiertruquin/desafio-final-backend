@@ -120,6 +120,7 @@ exports.editarProducto = async (req, res) => {
 exports.obtenerProductoIndividual = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log('req', req.params)
         const productoEncontrado = await Producto.findById({_id: id});
         res.send(productoEncontrado);
     } catch (error) {
