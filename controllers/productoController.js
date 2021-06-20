@@ -73,15 +73,30 @@ exports.obtenerProductos = async (req, res) => {
 };
 exports.obtenerProductosCategoria = async (req, res) => {
     try {
-        const productos = await Producto.find(req.query);
+        const { categoria } = req.query;
+        console.log('cat', categoria)
+        const productos = await Producto.find({'categoria': categoria});
         const productosHabilitados = [];
 
-        for (let i = 0; i < productos.length; i++) {
-            const producto = productos[i];
-            if ( producto.habilitado ) {
-                productosHabilitados.push(producto);
+        productos.map((producto, index) => {
+            if (req.query.limite) {
+                if ( producto.habilitado && index < 8 ) {
+                    productosHabilitados.push(producto);
+                }
+            } else {
+                if ( producto.habilitado ) {
+                    productosHabilitados.push(producto);
+                }
             }
-        }
+
+        })
+
+        // for (let i = 0; i < productos.length; i++) {
+        //     const producto = productos[i];
+        //     if ( producto.habilitado ) {
+        //         productosHabilitados.push(producto);
+        //     }
+        // }
 
         // const productosHabilitados = productos.find({ habilitado: true });
         // console.log('productos habilitados', productos);
