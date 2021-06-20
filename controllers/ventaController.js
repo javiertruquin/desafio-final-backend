@@ -20,3 +20,8 @@ exports.obtenerVenta = async (req, res) => {
         res.status(400).send('Hubo un error al enviar el mensaje');
     }
 };
+
+exports.getVentas = async (req, res) => {
+    const ventas = await Venta.find();
+    res.send(ventas);
+};

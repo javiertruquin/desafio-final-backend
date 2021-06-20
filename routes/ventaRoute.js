@@ -9,4 +9,6 @@ router.post(
     ventaController.obtenerVenta
 );
 
+router.get('/', ventaController.getVentas);
+
 module.exports = router;
