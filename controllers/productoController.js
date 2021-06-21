@@ -90,16 +90,6 @@ exports.obtenerProductosCategoria = async (req, res) => {
             }
 
         })
-
-        // for (let i = 0; i < productos.length; i++) {
-        //     const producto = productos[i];
-        //     if ( producto.habilitado ) {
-        //         productosHabilitados.push(producto);
-        //     }
-        // }
-
-        // const productosHabilitados = productos.find({ habilitado: true });
-        // console.log('productos habilitados', productos);
         res.send(productosHabilitados);
         console.log('funcion obtener productos');
     } catch (error) {

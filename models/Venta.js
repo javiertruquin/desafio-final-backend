@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 const VentaSchema = mongoose.Schema({
     usuario: {
-        type: String,
-        // required: true,
-        trim: true,
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: true,
     },
     domicilio: [
         {
