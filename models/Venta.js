@@ -18,20 +18,20 @@ const VentaSchema = mongoose.Schema({
             observaciones: { type: String, trim: true },
         },
     ],
-    numeroventa: {
-        type: Number,
-        trim: true,
-        default: 1,
-    },
-    articulos:[
+    carrito:[
         {
             producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto' },
-            // cantidad: { type: Number, default: 1 },
+            cantidad: { type: Number, default: 1 },
         },
     ],
+    total: {
+        type: Number,
+        trim: true,
+    },
     fecha: {
         type: Date,
         default: Date.now(),
+        trim: true,
     },
 });
 

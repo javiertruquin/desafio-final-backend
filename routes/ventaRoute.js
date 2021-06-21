@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 
 router.post(
     '/',
-    [check('domicilio', 'El domicilio es obligatorio').not().isEmpty()],
+    // [check('domicilio', 'El domicilio es obligatorio').not().isEmpty()],
     ventaController.obtenerVenta
 );
 
