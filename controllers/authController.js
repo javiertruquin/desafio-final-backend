@@ -100,7 +100,6 @@ exports.login = async (req, res) => {
 exports.editarUsuario = async (req, res) => {
     try {
         const { body } = req;
-        // console.log('entro', body)
         const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
         res.send(actualizacionUsuario);
     } catch (error) {
@@ -110,12 +109,9 @@ exports.editarUsuario = async (req, res) => {
 exports.editarDomicilio = async (req, res) => {
     try {
         const { domicilio, id, index } = req.body;
-        // console.log('entro', body)
         let usuario = await Usuario.findById(id);
         const domicilioNuevo = [];
-        console.log('index', domicilio[0])
-
-        // usuario.domicilio[index] = domicilio;
+        // console.log('index', domicilio[0]) 
         if ( index === undefined ) {
             usuario.domicilio.push(domicilio[0])
         } else {
@@ -128,42 +124,8 @@ exports.editarDomicilio = async (req, res) => {
             domicilioNuevo.splice(0, 0, domicilio);
             usuario.domicilio = domicilioNuevo[0];
         }
-        
-        // console.log('usuario', usuario)
-        // console.log('domicilio nuevo', domicilioNuevo[0])
-        
         await usuario.save();
         res.send(usuario);
-        // const foundCartItem = usuario.domicilio.find((item) => {
-        //     return item._id.equals(domicilio._id);
-        // });
-
-        // for (let i = 0; i < usuario.domicilio.length; i++) {
-        //     const domicilioSolo = usuario.domicilio[i];
-        //     const coincide = domicilioSolo._id === domicilio._id;
-        //     console.log('coincide', domicilio)
-        //     console.log('coincide', domicilioSolo)
-            
-        //     if (coincide ) {
-        //         usuario.domicilio[i] = domicilio;
-        //         domicilioEncontrado = true;
-        //     }
-        // }
-    //     if (!domicilioEncontrado) {
-    //        usuario.domicilio.push(domicilio);
-    //    }
-
-        // const domicilioUsuario = usuario.domicilio.findById(domicilio._id);
-        // const domicilioUsuario = await Usuario.domicilio.find((item) => {
-        //     return item._id.equals(domicilio._id);
-        // });
-        // if (domicilioUsuario) {
-        //     domicilioUsuario = domicilio;
-        // } else {
-        //     usuario.domicilio.push(domicilio);
-        // }
-        // console.log('usuario', usuario.domicilio)
-        // console.log('domicilio', domicilioUsuario);
     } catch (error) {
         res.status(400).send({ msg: 'Hubo un error al actualizar tu direccion'});
     }
@@ -183,22 +145,11 @@ exports.editarContraseña = async (req, res) => {
         res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
     }
 };
-// exports.editarDomicilio = async (req, res) => {
-//     try {
-//         const { body } = req;
-//         // console.log('entro', body)
 
-//         // console.log('req', body.id)
-//         const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
-//         res.send(actualizacionUsuario);
-//     } catch (error) {
-//         res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
-//     }
-// };
 exports.editarUsuarioAdmin = async (req, res) => {
     try {
         const { body } = req;
-        console.log('entro', body)
+        // console.log('entro', body)
 
         const salt = await bcryptjs.genSalt(10);
         body.password = await bcryptjs.hash(body.password, salt);
@@ -232,7 +183,7 @@ exports.getUser = async (req, res) => {
     res.send(usuario);
 };
 exports.getFavs = async (req, res) => {
-    console.log('entro', req.params)
+    // console.log('entro', req.params)
     const usuario = await Usuario.findById(req.usuario.id).select('favoritos').populate("favoritos.producto");
     res.send(usuario);
 };

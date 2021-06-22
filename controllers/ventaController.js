@@ -1,21 +1,21 @@
 const Venta = require('../models/Venta');
+const Producto = require('../models/Producto');
 const { validationResult } = require('express-validator');
 
 exports.obtenerVenta = async (req, res) => {
-    console.log('body', req.body)
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
         return res.status(400).json({ msg: errores.array() });
     }
+    req.body.carrito?.map( async (producto) => {
+        let produc = await Producto.findById(producto.producto)
+        produc.stock = produc.stock - producto.cantidad;
+        await produc.save();
+    })
 
     try {
-        //nuevo mensaje
         let venta = new Venta(req.body);
-
-        //guardar mensaje
         await venta.save();
-
-        //mensaje de exito
         res.send('Mensaje enviado');
     } catch (error) {
         console.log(error);

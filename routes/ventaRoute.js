@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ventaController = require('../controllers/ventaController');
 const { check } = require('express-validator');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
 router.post(
     '/',
@@ -9,6 +10,6 @@ router.post(
     ventaController.obtenerVenta
 );
 
-router.get('/', ventaController.getVentas);
+router.get('/', adminMiddleware, ventaController.getVentas);
 
 module.exports = router;

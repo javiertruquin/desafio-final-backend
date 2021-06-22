@@ -46,7 +46,6 @@ exports.modificarCarrito = async (req, res) => {
         const foundCartItem = usuario.carrito.find((item) => {
             return item.producto.equals(itemCarrito.producto);
         });
-        console.log('foundFavItem', foundCartItem);
         if (foundCartItem) {
             foundCartItem.cantidad = itemCarrito.cantidad;
         } else {
@@ -62,7 +61,6 @@ exports.resetearCarrito = async (req, res) => {
     try {
         // const { id } = req.body;
         const usuario = await Usuario.findById({ _id: req.usuario.id });
-        console.log('id', usuario)
         usuario.carrito = [];
         await usuario.save();
         res.send(usuario);
@@ -72,7 +70,6 @@ exports.resetearCarrito = async (req, res) => {
 };
 exports.modificarFavorito = async (req, res) => {
     try {
-        // console.log('entro');
         const { itemFavorito } = req.body;
         const usuario = await Usuario.findById({ _id: req.usuario.id });
         const foundFavItem = usuario.favoritos.find((item) => {
@@ -101,9 +98,7 @@ exports.modificarFavorito = async (req, res) => {
 exports.obtenerFavoritos = async (req, res) => {
     const { params } = req;
     const usuario = await Usuario.findById({ _id: params.id });
-    res.send(usuario.favoritos)
-    // console.log('entro', usuario.favoritos)
-    
+    res.send(usuario.favoritos)    
 };
 
 exports.eliminarCarrito = async (req, res) => {
