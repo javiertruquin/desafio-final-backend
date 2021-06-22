@@ -58,9 +58,21 @@ exports.modificarCarrito = async (req, res) => {
         console.log('exports.modificarUsuario= ~ error', error);
     }
 };
+exports.resetearCarrito = async (req, res) => {
+    try {
+        // const { id } = req.body;
+        const usuario = await Usuario.findById({ _id: req.usuario.id });
+        console.log('id', usuario)
+        usuario.carrito = [];
+        await usuario.save();
+        res.send(usuario);
+    } catch (error) {
+        console.log('exports.modificarUsuario= ~ error', error);
+    }
+};
 exports.modificarFavorito = async (req, res) => {
     try {
-        console.log('entro');
+        // console.log('entro');
         const { itemFavorito } = req.body;
         const usuario = await Usuario.findById({ _id: req.usuario.id });
         const foundFavItem = usuario.favoritos.find((item) => {
@@ -71,7 +83,7 @@ exports.modificarFavorito = async (req, res) => {
                 for (let i = 0; i < usuario.favoritos.length; i++) {
                     const prodFavorito = usuario.favoritos[i];
                     if ( foundFavItem.producto === prodFavorito.producto ) {
-                        console.log('coincide')
+                        // console.log('coincide')
                     } else {
                         nuevosFavoritos.push(prodFavorito);                    
                     }
@@ -83,7 +95,7 @@ exports.modificarFavorito = async (req, res) => {
         await usuario.save();
         res.send(usuario);
     } catch (error) {
-        console.log('exports.modificarUsuario= ~ error', error);
+        console.log('Modificar Carrito error', error);
     }
 };
 exports.obtenerFavoritos = async (req, res) => {

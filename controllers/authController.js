@@ -231,6 +231,11 @@ exports.getUser = async (req, res) => {
     const usuario = await Usuario.findById(req.usuario.id).select('-password -__v').populate("carrito.producto");
     res.send(usuario);
 };
+exports.getFavs = async (req, res) => {
+    console.log('entro', req.params)
+    const usuario = await Usuario.findById(req.usuario.id).select('favoritos').populate("favoritos.producto");
+    res.send(usuario);
+};
 
 exports.getUserComplete = async (req, res) => {
     const usuario = await Usuario.findById(req.usuario.id).select('-password -__v');

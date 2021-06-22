@@ -22,6 +22,7 @@ router.put('/password', authMiddleware, authController.editarContraseña);
 router.put('/admin', adminMiddleware, authController.editarUsuarioAdmin);
 router.delete("/:id", adminMiddleware, authController.deleteUsuario);
 router.get('/', authMiddleware, authController.getUser);
+router.get('/favoritos', authMiddleware, authController.getFavs);
 router.get('/complete', authMiddleware, authController.getUserComplete);
 router.get('/usuariosFilter', adminMiddleware, authController.getUsersFilter);
 router.get('/usuariosAdmin', adminMiddleware, authController.getUsers);
