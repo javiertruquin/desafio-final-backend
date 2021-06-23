@@ -106,6 +106,16 @@ exports.editarUsuario = async (req, res) => {
         res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
     }
 };
+exports.editarFotoPerfil = async (req, res) => {
+    try {
+        const { body } = req;
+        console.log('entro', body)
+        const actualizacionUsuario = await Usuario.findByIdAndUpdate( body.id, body, { new: true });
+        res.send(actualizacionUsuario);
+    } catch (error) {
+        res.status(400).send({ msg: 'Hubo un error al actualizar el usuario'});
+    }
+};
 exports.editarDomicilio = async (req, res) => {
     try {
         const { domicilio, id, index } = req.body;
