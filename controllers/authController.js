@@ -175,12 +175,7 @@ exports.editarUsuarioAdmin = async (req, res) => {
 exports.deleteUsuario = async (req, res) => {
     try {
         const { id } = req.params;
-        // console.log('body', body)
         const usuario = await Usuario.findByIdAndDelete(id);
-        // if (!producto.creator.equals(usuario.id)) {
-        //     return res.status(403).json({ msg: 'no tiene permitido eliminar este meme' });
-        // }
-        // await usuario.delete();
         res.send({ msg: 'Usuario eliminado' });
     } catch (error) {
         res.status(400).json({ msg: 'error al eliminar el producto' });

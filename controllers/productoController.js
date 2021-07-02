@@ -47,13 +47,7 @@ exports.crearProducto = async (req, res) => {
 exports.deleteProducto = async (req, res) => {
     try {
         const { id } = req.params;
-        console.log('entro')
-        // const { id } = req.params;
         const producto = await Producto.findByIdAndDelete(id);
-        // if (!producto.creator.equals(usuario.id)) {
-        //     return res.status(403).json({ msg: 'no tiene permitido eliminar este meme' });
-        // }
-        // await producto.delete();
         res.send({ msg: 'Producto eliminado' });
     } catch (error) {
         res.status(400).json({ msg: 'error al eliminar el producto' });
