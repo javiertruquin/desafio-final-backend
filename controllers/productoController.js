@@ -47,7 +47,7 @@ exports.crearProducto = async (req, res) => {
 exports.deleteProducto = async (req, res) => {
     try {
         const { id } = req.params;
-        const producto = await Producto.findByIdAndDelete(id);
+        await Producto.findByIdAndDelete(id);
         res.send({ msg: 'Producto eliminado' });
     } catch (error) {
         res.status(400).json({ msg: 'error al eliminar el producto' });

@@ -29,8 +29,8 @@ exports.getMensajes = async (req, res) => {
 
 exports.deleteMensaje = async (req, res) => {
     try {
-        const { _id } = req.params;
-        await Mensaje.findOneAndDelete(_id);
+        const { _id } = req.query;
+        await Mensaje.findByIdAndDelete(_id);
         res.send({ msg: 'Mensaje eliminado' });
     } catch (error) {
         res.status(400).json({ msg: 'error al eliminar mensaje' });
