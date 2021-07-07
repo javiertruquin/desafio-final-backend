@@ -6,7 +6,7 @@ const authController = require('../controllers/authController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const adminMiddleware = require('../middlewares/adminMiddleware');
 
-router.post('/register', usuarioValidation.crearUsuario, authController.register);
+router.post('/registro', usuarioValidation.crearUsuario, authController.register);
 router.post(
     '/login',
     [
